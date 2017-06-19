@@ -1,0 +1,33 @@
+<ion-view view-title="Manage" cache-view="false">
+  <ion-content>
+    <ion-list ng-if="isLogin == true" id="collect-list4">
+      <label class="item item-input" id="collect-search2">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="search" placeholder="">
+      </label>
+
+
+      <ion-item   >temporary record</ion-item>
+    </ion-list>
+
+    <!-- <ion-list ng-show="isLogin == true" ng-repeat="obj in submission">
+      <ion-item  ng-click="gotoSubmission([obj.submission_id])" ></ion-item>
+    </ion-list> -->
+
+    <div ng-show="isLogin == true" class="card" ng-repeat="obj in submission" ng-click="gotoSubmission([obj.id])">
+      <div class="item item-divider">
+        {{obj.formname}}
+      </div>
+      <div class="item item-text-wrap">
+        created by {{obj.date}}
+      </div>
+      <div class="item item-text-wrap">
+        belong to site {{obj.sitename}}
+      </div>
+      <div class="item item-text-wrap">
+        project {{obj.projectname}}
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>
