@@ -73,12 +73,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   })
 
 
-  .state('tab.form', {
-    url: '/form',
+  .state('tab.camera', {
+    url: '/camera',
     views: {
-      'tab-form': {
-        templateUrl: 'templates/tab-form.html',
-        controller: 'FormCtrl'
+      'tab-camera': {
+        templateUrl: 'templates/camera/tab-camera.html',
+        controller: 'CameraCtrl'
       }
     }
   })
