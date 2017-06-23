@@ -15,7 +15,13 @@ angular.module('starter.controllers')
                 enableHighAccuracy: true
             };
 
+            $scope.loading = $ionicLoading.show({
+                content: 'getting geolocation',
+                showBackdrop: false
+            });
+
             $cordovaGeolocation.getCurrentPosition(options).then(function(position) {
+                $ionicLoading.hide();
                     console.log("getCurrentPosition");
                     $scope.pictures = {
                         "user_id": $rootScope.user.id,
@@ -101,11 +107,12 @@ angular.module('starter.controllers')
                     }
 
                     $scope.submit = function() {
-                        var pictures = $scope.pictures;
+                        var images = $scope.images;
+                        console.log(picture);
                         var request = $http({
                             method: "post",
                             url: 'http://sciencetap.us/tao/app/submitPictureNoSite.php',
-                            data: pictures
+                            data: images
                         })
                         //show loading
                         $scope.loading = $ionicLoading.show({
@@ -131,6 +138,7 @@ angular.module('starter.controllers')
 
                 },
                 function(error) {
+                    $ionicLoading.hide();
                     alert("Could not get location");
                     console.log("Could not get location");
                 });
