@@ -1,16 +1,18 @@
-<ion-view view-title="camera">
+<ion-view view-title="camera" cache-view="false">
+
+  <ion-content>
+    <button class="button button-positive  button-block" ng-click="addImage()">add new image</button>
+
+    <div ng-repeat="tmpObj in images">
+        <img ng-src="{{tmpObj.value}}" style="width:300px;height:200px;">
+        <button class="button button-danger" ng-click="deleteImg(tmpObj.id)">delete</button>
+    </div>
+
+    <!-- <pre> imgage = {{images | json }}</pre> -->
+    <pre> count = {{imgCount | json }}</pre>
+
+    <button class="button button-positive  button-block" ng-click="submit()">submit</button>
 
 
-    <form id="exampleForm-form3" class="list">
-      <ion-toggle toggle-class="toggle-positive" id="exampleForm-toggle2">Example Bar</ion-toggle>
-      <ion-radio id="exampleForm-radio2">Example Bar</ion-radio>
-      <label class="item item-input" id="exampleForm-input2">
-        <span class="input-label">Example Input</span>
-        <input type="text" placeholder="">
-      </label>
-    </form>
-    <button id="exampleForm-button37" class="button button-positive  button-block">Submit</button>
-
-
-  </ion-content>
+    </ion-content>
 </ion-view>
