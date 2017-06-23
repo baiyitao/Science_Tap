@@ -107,12 +107,12 @@ angular.module('starter.controllers')
                     }
 
                     $scope.submit = function() {
-                        var images = $scope.images;
-                        console.log(picture);
+                        $scope.pictures.images = $scope.images;
+                        console.log($scope.pictures);
                         var request = $http({
                             method: "post",
                             url: 'http://sciencetap.us/tao/app/submitPictureNoSite.php',
-                            data: images
+                            data: $scope.pictures
                         })
                         //show loading
                         $scope.loading = $ionicLoading.show({
