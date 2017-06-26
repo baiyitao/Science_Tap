@@ -1,17 +1,21 @@
 <ion-view view-title="camera" cache-view="false">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon icon ion-camera" ng-click="addImage()">
+    </button>
+  </ion-nav-buttons>
+
 
   <ion-content>
-    <button class="button button-positive  button-block" ng-click="addImage()">add new image</button>
-
     <div ng-repeat="tmpObj in images">
         <img ng-src="{{tmpObj.value}}" style="width:300px;height:200px;">
-        <button class="button button-danger" ng-click="deleteImg(tmpObj.id)">delete</button>
+        <button class="button button-assertive" ng-click="deleteImg(tmpObj.id)">delete</button>
     </div>
 
-    <!-- <pre> imgage = {{images | json }}</pre> -->
-    <pre> count = {{imgCount | json }}</pre>
-
+    <!-- <pre> count = {{imgCount | json }}</pre> -->
+  <div class="padding">
     <button class="button button-positive  button-block" ng-click="submit()">submit</button>
+    <button class="button button-balanced  button-block" ng-click="history()">history</button>
+  </div>
 
 
     </ion-content>

@@ -1,0 +1,31 @@
+<ion-view view-title="ManageForm">
+  <ion-content>
+
+
+    <div class="list">
+      <label ng-repeat="obj in submission_data.date" class="item">
+          <h2>{{obj.name}}</h2>
+          <p>{{obj.value}}</p>
+        </label>
+      <label ng-repeat="obj in submission_data.number" class="item">
+            <h2>{{obj.name}}</h2>
+            <p>{{obj.value}}</p>
+        </label>
+      <label ng-repeat="obj in submission_data.text" class="item">
+              <h2>{{obj.name}}</h2>
+              <p>{{obj.value}}</p>
+        </label>
+      <label ng-repeat="obj in submission_data.time" class="item">
+                <h2>{{obj.name}}</h2>
+                <p>{{obj.value}}</p>
+        </label>
+      <label ng-repeat="obj in submission_data.select" class="item">
+                  <h2>{{obj.name}}</h2>
+                  <p ng-repeat="val in obj.value">{{val}}</p>
+        </label>
+    </div>
+
+
+
+  </ion-content>
+</ion-view>

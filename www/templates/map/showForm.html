@@ -1,6 +1,6 @@
 <ion-view view-title="{{name}}">
   <ion-nav-buttons side="right">
-    <button class="button button-icon icon ion-camera" ng-click="camera()">
+    <button class="button button-icon icon ion-camera" ng-click="addImage()">
     </button>
   </ion-nav-buttons>
   <ion-content>
@@ -39,43 +39,44 @@
             <div class="input-label">
               {{obj.name}}
             </div>
-            <input type="hidden" ng-model="form.selectSingle[$index].name" ng-init = "form.selectSingle[$index].name = obj.name"></input>
+            <input type="hidden" ng-model="form.selectSingle[$index].name" ng-init="form.selectSingle[$index].name = obj.name"></input>
             <select ng-model="form.selectSingle[$index].value" ng-init=" form.selectSingle[$index].value = obj.values[0]" ng-options="option for option in obj.values"></select>
           </div>
 
-
-          <div class="item " ng-repeat="obj in selectMulti">
-            <button class="button button-small button-assertive" modal-select="" ng-model="form.selectMulti[$index].value" options="obj.values" multiple="true" modal-title="Select some numbers">
-            {{obj.name}}
-            <input type="hidden" ng-model="form.selectMulti[$index].name" ng-init = "form.selectMulti[$index].name = obj.name"></input>
-
-            <div class="option">
-              {{option}}
+          <div class="padding">
+            <div class="item " style="padding: 0px; border-width: 0px;" ng-repeat="obj in selectMulti">
+              <button class="button button-block button-balanced" modal-select="" ng-model="form.selectMulti[$index].value" options="obj.values" multiple="true" modal-title="Select some numbers">{{obj.name}}
+                <input type="hidden" ng-model="form.selectMulti[$index].name" ng-init = "form.selectMulti[$index].name = obj.name"></input>
+                  <!-- <div class="option">
+                    {{option}}
+                  </div> -->
+                </button>
             </div>
-          </button>
           </div>
-
-
-
         </div>
-        <div class="button-bar">
+
+        <div class="padding">
+          <button class="button button-positive  button-block" ng-click="submit(form)">submit</button>
+        </div>
+
+        <!-- <div class="button-bar">
           <a class="button button-block button-balanced" ng-click="reset()">Reset</a>
           <a class="button button-block button-positive" ng-click="submit(form)">submit</a>
-        </div>
+        </div> -->
 
       </form>
       <!-- <pre>form = {{form | json}}</pre> -->
     </div>
 
-    <button ng-click="addImage()">add new image</button>
+    <!-- <button ng-click="addImage()">add new image</button> -->
 
     <div ng-repeat="tmpObj in images">
       <img ng-src="{{tmpObj.value}}" style="width:300px;height:200px;">
-      <button ng-click="deleteImg(tmpObj.id)">delete</button>
+      <button class="button button-assertive" ng-click="deleteImg(tmpObj.id)">delete</button>
     </div>
 
     <!-- <pre> imgage = {{images | json }}</pre> -->
-    <pre> count = {{imgCount | json }}</pre>
+    <!-- <pre> count = {{imgCount | json }}</pre> -->
 
 
 

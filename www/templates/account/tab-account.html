@@ -1,46 +1,40 @@
 <ion-view view-title="Account">
   <ion-content>
 
-    <div ng-if="isLogin == true" class="list card" id="account-card24">
-      <ion-item class="item-avatar" id="account-list-item31">
-        <h2>{{user.firstname}}</h2>
-      </ion-item>
-      <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
-        <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
-      </div>
-      <div class="item item-body" id="account-list-item-container9">
-        <div id="account-markdown12" class="show-list-numbers-and-dots">
-          <p style="margin-top:0px;color:#000000;">{{user.email}}</p>
-        </div>
-      </div>
+    <div ng-if="isLogin == true" class="padding">
+
+      <h2>Hello {{user.firstname}}</h2>
+      <p style="margin-top:0px;color:#000000;">{{user.email}}</p>
+
+      <button ng-if="isLogin == true" class="button button-positive  button-block" ng-click="logout()">Log out</button>
+
     </div>
-    <button ng-if="isLogin == true" id="account-button44" class="button button-positive  button-block" ng-click="logout()">Log out</button>
 
 
 
-    <div class="list" ng-if="isLogin == false">
-      <h2>Login</h2>
-              <label class="item item-input">
+    <div class="padding" ng-if="isLogin == false">
+
+      <label class="item item-input">
                 <span class="input-label">email</span>
                 <input type="text" ng-model="userInfo.email">
               </label>
-              <label class="item item-input">
+      <label class="item item-input">
                 <span class="input-label">Password</span>
                 <input type="password" ng-model="userInfo.password">
               </label>
-            </div>
-            <div class="padding" ng-if="isLogin == false">
-              <!-- <button class="button button-block button-positive" ng-click="signIn(user)"> -->
-                <button class="button button-block button-positive" ng-click="login(userInfo)">
+    </div>
+    <div class="padding" ng-if="isLogin == false">
+      <!-- <button class="button button-block button-positive" ng-click="signIn(user)"> -->
+      <button class="button button-block button-positive" ng-click="login(userInfo)">
                 Login
               </button>
-              <p class="text-center" ng-click="">
-                Forgot password
-              </p>
-              <p class="text-center" ng-click="register()">
-                register
-              </p>
-            </div>
+      <p class="text-center" ng-click="">
+        Forgot password
+      </p>
+      <p class="text-center" ng-click="register()">
+        register
+      </p>
+    </div>
 
 
 
@@ -53,7 +47,7 @@
 
     </form> -->
 
-      <pre ng-if="isLogin == false">userInfo = {{userInfo | json}}</pre>
+    <!-- <pre ng-if="debug == true">userInfo = {{userInfo | json}}</pre> --> 
 
   </ion-content>
 </ion-view>

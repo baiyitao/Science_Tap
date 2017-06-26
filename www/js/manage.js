@@ -15,10 +15,12 @@ angular.module('starter.controllers')
             })
 
             request.success(function(data) {
-                $scope.showSub = true;
                 $scope.submission = data.data;
                 console.log($scope.submission);
             })
+
+            //!!//return without site -666
+
         }
         $scope.gotoSubmission = function(id) {
             //var test = 1234567;

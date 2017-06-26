@@ -1,4 +1,4 @@
-<ion-view view-title="Manage" cache-view="false">
+<ion-view view-title="History" cache-view="false">
   <ion-content>
 
       <label class="item item-input" >
@@ -7,18 +7,18 @@
       </label>
 
 
-    <div ng-show="isLogin == true" class="card" ng-repeat="obj in submission | filter:searchText" ng-click="gotoSubmission([obj.id])">
-      <div class="item item-divider " style="background-color: #33cd5fcc">
-        {{obj.formname}}
+    <div ng-show="isLogin == true" class="card" ng-repeat="obj in history | filter:searchText" ng-click="gotoHistory([obj.id])">
+      <div class="item item-divider button-balanced" style="background-color: #33cd5fcc">
+        created on {{obj.date}}
       </div>
       <div class="item item-text-wrap">
-        created by {{obj.date}}
+        latitude {{obj.lat}}
       </div>
       <div class="item item-text-wrap">
-        belong to site {{obj.sitename}}
+        longitude {{obj.lon}}
       </div>
       <div class="item item-text-wrap">
-        project {{obj.projectname}}
+        # pic ?
       </div>
     </div>
 
