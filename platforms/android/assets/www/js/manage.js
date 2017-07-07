@@ -15,10 +15,12 @@ angular.module('starter.controllers')
             })
 
             request.success(function(data) {
-                $scope.showSub = true;
                 $scope.submission = data.data;
                 console.log($scope.submission);
             })
+
+            //!!//return without site -666
+
         }
         $scope.gotoSubmission = function(id) {
             //var test = 1234567;
@@ -64,7 +66,11 @@ angular.module('starter.controllers')
         request.success(function(data) {
             $scope.showSub = true;
             $scope.submission_data = data.data;
+            $scope.photo = data.photo;
+            $scope.site_id = data.site_id;
             console.log($scope.submission_data);
+            console.log($scope.photo);
+            console.log($scope.site_id);
         })
 
 

@@ -6,6 +6,12 @@
 
 
   <ion-content>
+    <textarea  ng-model="description" rows="4" style="width: 378px; height: 122px;margin: 10px;border: 3px #94daa1 solid;"></textarea>
+
+  <pre> description = {{description | json }}</pre>
+
+
+
     <div ng-repeat="tmpObj in images">
         <img ng-src="{{tmpObj.value}}" style="width:300px;height:200px;">
         <button class="button button-assertive" ng-click="deleteImg(tmpObj.id)">delete</button>
@@ -13,7 +19,7 @@
 
     <!-- <pre> count = {{imgCount | json }}</pre> -->
   <div class="padding">
-    <button class="button button-positive  button-block" ng-click="submit()">submit</button>
+    <button class="button button-positive  button-block" ng-click="submit(description)">submit</button>
     <button class="button button-balanced  button-block" ng-click="history()">history</button>
   </div>
 

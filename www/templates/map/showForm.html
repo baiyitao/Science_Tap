@@ -47,9 +47,9 @@
             <div class="item " style="padding: 0px; border-width: 0px;" ng-repeat="obj in selectMulti">
               <button class="button button-block button-balanced" modal-select="" ng-model="form.selectMulti[$index].value" options="obj.values" multiple="true" modal-title="Select some numbers">{{obj.name}}
                 <input type="hidden" ng-model="form.selectMulti[$index].name" ng-init = "form.selectMulti[$index].name = obj.name"></input>
-                  <!-- <div class="option">
+                  <div class="option">
                     {{option}}
-                  </div> -->
+                  </div>
                 </button>
             </div>
           </div>

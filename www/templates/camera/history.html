@@ -7,11 +7,11 @@
       </label>
 
 
-    <div ng-show="isLogin == true" class="card" ng-repeat="obj in history | filter:searchText" ng-click="gotoHistory([obj.id])">
-      <div class="item item-divider button-balanced" style="background-color: #33cd5fcc">
+    <div ng-show="isLogin == true" class="card" ng-repeat="obj in pictureHistory | filter:searchText" ng-click="historyDetial([obj.id])">
+      <div class="item item-divider " >
         created on {{obj.date}}
       </div>
-      <div class="item item-text-wrap">
+      <!-- <div class="item item-text-wrap">
         latitude {{obj.lat}}
       </div>
       <div class="item item-text-wrap">
@@ -19,7 +19,7 @@
       </div>
       <div class="item item-text-wrap">
         # pic ?
-      </div>
+      </div> -->
     </div>
 
   </ion-content>

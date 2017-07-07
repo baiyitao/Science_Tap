@@ -5,9 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova', 'ionic-modal-select'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova', 'ionic-modal-select','ngStorage'])
 
-  .run(function($ionicPlatform) {
+  .run(function($ionicPlatform,$localStorage,$rootScope) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -21,6 +21,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         StatusBar.styleDefault();
       }
     });
+
+    if($localStorage.isLogin){
+      console.log("yoyoyo");
+      $rootScope.isLogin = true;
+      $rootScope.user = $localStorage.user;
+    }
+
+
+
+
   })
 
   .config(function($stateProvider, $urlRouterProvider) {
@@ -97,6 +107,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
       .state('tab.historyDetail', {
         url: '/history-detail',
+        params: {
+          data: null
+        },
         views: {
           'tab-camera': {
             templateUrl: 'templates/camera/history-detail.html',

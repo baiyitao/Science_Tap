@@ -1,14 +1,15 @@
 angular.module('starter.controllers')
   .controller('CameraCtrl', function($scope, $rootScope, $http, $state, $ionicLoading, $cordovaCamera, $ionicActionSheet, $cordovaGeolocation) {
 
+    $scope.description;
 
     if ($rootScope.isLogin == false || $rootScope.isLogin == undefined) {
       alert("please login to see more");
       $state.go('tab.account')
     } else {
-
       $scope.images = [];
       $scope.imgCount = 0;
+
 
       var options = {
         timeout: 10000,
@@ -110,9 +111,10 @@ angular.module('starter.controllers')
           }
 
 
-          $scope.submit = function() {
+          $scope.submit = function(text) {
             $scope.pictures.images = $scope.images;
-            console.log($scope.pictures);
+            $scope.pictures.description = text;
+            // console.log($scope.pictures);
             var request = $http({
               method: "post",
               url: 'http://sciencetap.us/tao/app/submitPictureNoSite.php',
@@ -148,23 +150,23 @@ angular.module('starter.controllers')
     }
   })
 
-  .controller('HistoryCtrl', function($scope, $stateParams, $http, $state) {
+  .controller('HistoryCtrl', function($scope, $stateParams, $http, $state,$rootScope) {
 
-      var data = {
-        "user_id": $rootScope.user.id
-      }
-      var request = $http({
-        method: "post",
-        url: 'http://sciencetap.us/tao/app/getPictureHistory.php',
-        data: data
-      })
+    var data = {
+      "user_id": $rootScope.user.id
+    }
+    var request = $http({
+      method: "post",
+      url: 'http://sciencetap.us/tao/app/getPictureHistory.php',
+      data: data
+    })
 
-      request.success(function(data) {
-        $scope.pictureHistory = data.data;
-        console.log($scope.pictureHistory);
-      })
+    request.success(function(data) {
+      $scope.pictureHistory = data.data;
+      console.log($scope.pictureHistory);
+    })
 
-      //!!//return without site -666
+    //!!//return without site -666
 
 
     $scope.historyDetial = function(id) {
@@ -201,6 +203,14 @@ angular.module('starter.controllers')
 
     request.success(function(data) {
       $scope.submission_data = data.data;
+      $scope.photo = data.photo;
+      if($scope.photo.length != 0){
+        $scope.lat = data.photo[0].lat;
+        $scope.lon = data.photo[0].lon;
+
+      }
+
       console.log($scope.submission_data);
+      console.log($scope.photo);
     })
   })

@@ -264,10 +264,8 @@ angular.module('starter.controllers')
                 //show loading
 
                 $scope.loading = $ionicLoading.show({
-                    content: 'submitting form data',
-                    showBackdrop: false
+                  template: 'submitting form data'
                 });
-
                 request.success(function(response) {
                     console.log("submitFormData");
                     console.log(response)

@@ -1,29 +1,15 @@
-<ion-view view-title="ManageForm">
-  <ion-content>
+<ion-view view-title="photo">
+  <ion-content padding="true">
 
+<div class="">
+  {{submission_data.description}}
+</div>
 
-    <div class="list">
-      <label ng-repeat="obj in submission_data.date" class="item">
-          <h2>{{obj.name}}</h2>
-          <p>{{obj.value}}</p>
-        </label>
-      <label ng-repeat="obj in submission_data.number" class="item">
-            <h2>{{obj.name}}</h2>
-            <p>{{obj.value}}</p>
-        </label>
-      <label ng-repeat="obj in submission_data.text" class="item">
-              <h2>{{obj.name}}</h2>
-              <p>{{obj.value}}</p>
-        </label>
-      <label ng-repeat="obj in submission_data.time" class="item">
-                <h2>{{obj.name}}</h2>
-                <p>{{obj.value}}</p>
-        </label>
-      <label ng-repeat="obj in submission_data.select" class="item">
-                  <h2>{{obj.name}}</h2>
-                  <p ng-repeat="val in obj.value">{{val}}</p>
-        </label>
-    </div>
+<p class="list">lat {{lat}}, lon {{lon}}</p>
+<div class="list" ng-repeat="obj in photo">
+  <img src="http://sciencetap.us/uploads/NoSite/{{obj.path}}" alt="" style="width:100%;">
+
+</div>
 
 
 
