@@ -1,11 +1,9 @@
 angular.module('starter.controllers')
-  .controller('UserCtrl', function($scope, $rootScope, $state,$http) {
+  .controller('UserCtrl', function($scope, $rootScope, $state,$http,$localStorage) {
 
     if($rootScope.isLogin == undefined){
       $rootScope.isLogin = false;
     }
-    
-    $rootScope.user = {};
 
     $scope.userInfo = {};
 
@@ -22,11 +20,18 @@ angular.module('starter.controllers')
 
         if(response.data.success == true){
           $rootScope.isLogin = true;
+          $rootScope.user = {};
           $rootScope.user.firstname = response.data.data.firstname;
           $rootScope.user.lastname = response.data.data.lastname;
           $rootScope.user.id = response.data.data.id;
           $rootScope.user.email = userInfo.email;
           //if return yes, do/ show associate project-site(later)
+
+          $localStorage.user = $rootScope.user;
+          $localStorage.isLogin = true;
+
+
+
         } else {
           $scope.error = response.data.error;
           alert("login fail");
@@ -48,6 +53,10 @@ angular.module('starter.controllers')
 
       $rootScope.user = {}
       $rootScope.isLogin = false;
+
+      $localStorage.user = {};
+      $localStorage.isLogin = false;
+
     }
 
     $scope.register = function() {

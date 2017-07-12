@@ -1,5 +1,5 @@
 <ion-view view-title="ManageForm">
-  <ion-content>
+  <ion-content padding="true">
 
 
     <div class="list">
@@ -23,6 +23,10 @@
                   <h2>{{obj.name}}</h2>
                   <p ng-repeat="val in obj.value">{{val}}</p>
         </label>
+    </div>
+
+    <div class="" ng-repeat="obj in photo">
+      <img src="http://sciencetap.us/uploads/site{{site_id}}/{{obj.path}}" alt="" style="width: 100%;">
     </div>
 
 

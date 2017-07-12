@@ -16,14 +16,14 @@
       <div class="input-label">
         select form
       </div>
-      <select ng-model="selectValue2" ng-options="item as item.form_name for item in form">
+      <select ng-model="selectValue2" ng-change="showButton()" ng-options="item as item.form_name for item in form">
       </select>
     </div>
     <!-- <pre>selectValue2 = {{selectValue2 | json}}</pre> -->
 
 
 
-    <button class="button button-block button-positive" ng-click="getForm(selectValue.project_id,selectValue2.form_id)"> go to form </button>
+    <button ng-show="showB" class="button button-block button-positive" ng-click="getForm(selectValue.project_id,selectValue2.form_id)"> go to form </button>
 
 
 

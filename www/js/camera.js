@@ -131,7 +131,7 @@ angular.module('starter.controllers')
                 console.log("submit pictures success");
                 $ionicLoading.hide();
                 alert("submit success, now go to Manage page");
-                $state.go('tab.manage');
+                $state.go('tab.history');
               } else {
                 console.log("submit fail");
                 $ionicLoading.hide();
