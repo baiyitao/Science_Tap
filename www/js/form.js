@@ -325,6 +325,8 @@ angular.module('starter.controllers')
 
     $scope.getFromId = function(project_id) {
 
+      $scope.showB = false;
+
       data = {
         "user_id": identity.user_id,
         "site_id": identity.site_id,
