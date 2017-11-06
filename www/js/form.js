@@ -239,8 +239,15 @@ angular.module('starter.controllers')
               for (i = 0; i < Object.keys(form.selectSingle).length; i++) {
                 select[i] = {};
                 select[i].name = form.selectSingle[i].name;
-                select[i].value = [];
-                select[i].value[0] = form.selectSingle[i].value;
+
+                if(form.selectSingle[i].value == undefined){
+                  select[i].value = [];
+                  select[i].value[0] = "null";
+                }else{
+                  select[i].value = [];
+                  select[i].value[0] = form.selectSingle[i].value;
+                }
+
                 count++;
               }
               delete form.selectSingle;
@@ -249,6 +256,12 @@ angular.module('starter.controllers')
             if (form.selectMulti != undefined) {
               for (i = 0; i < Object.keys(form.selectMulti).length; i++) {
                 select[count] = form.selectMulti[i];
+
+                if(form.selectMulti[i].value == undefined){
+                  select[count].value = [];
+                  select[count].value[0] = "null";
+                }
+
                 count++;
               }
               delete form.selectMulti;

@@ -1,13 +1,13 @@
-<ion-view view-title="photo">
+<ion-view title="photo">
   <ion-content padding="true">
 
 <div class="">
-  {{submission_data.description}}
+  Description: {{submission_data.description}}
 </div>
 
 <p class="list">lat {{lat}}, lon {{lon}}</p>
 <div class="list" ng-repeat="obj in photo">
-  <img src="http://sciencetap.us/uploads/NoSite/{{obj.path}}" alt="" style="width:100%;">
+  <img src="http://sciencetap.us/uploads/NoSite/{{obj.path}}" alt="" style="width:90%;">
 
 </div>
 

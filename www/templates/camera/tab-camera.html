@@ -1,4 +1,4 @@
-<ion-view view-title="camera" cache-view="false">
+<ion-view title="camera" cache-view="false">
   <ion-nav-buttons side="right">
     <button class="button button-icon icon ion-camera" ng-click="addImage()">
     </button>
@@ -6,14 +6,14 @@
 
 
   <ion-content>
-    <textarea  ng-model="description" rows="4" style="width: 378px; height: 122px;margin: 10px;border: 3px #94daa1 solid;"></textarea>
+    <textarea  ng-model="description" rows="4" style="width: 94%; height: 122px;margin: 3%;border: 3px #94daa1 solid;"></textarea>
 
-  <pre> description = {{description | json }}</pre>
+  <!-- <pre> description = {{description | json }}</pre> -->
 
 
 
-    <div ng-repeat="tmpObj in images">
-        <img ng-src="{{tmpObj.value}}" style="width:300px;height:200px;">
+    <div ng-repeat="tmpObj in images" style="width: 94%;margin:3%;">
+        <img ng-src="{{tmpObj.value}}" style="width:70%;">
         <button class="button button-assertive" ng-click="deleteImg(tmpObj.id)">delete</button>
     </div>
 
