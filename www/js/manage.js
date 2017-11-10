@@ -146,9 +146,7 @@ angular.module('starter.controllers')
             console.log('Tapped!', res);
           });
 
-          $timeout(function() {
-             myPopup.close(); //close the popup after 3 seconds for some reason
-          }, 2000);
+  
 
 
 
