@@ -28,7 +28,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       $rootScope.user = $localStorage.user;
     }
 
-
+    if($localStorage.saveForm == undefined){
+      $localStorage.saveForm =[];
+    }
 
 
   })
@@ -84,6 +86,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       })
 
+      .state('tab.saveForm', {
+        url: '/saveForm',
+        params: {
+          data: null
+        },
+        views: {
+          'tab-manage': {
+            templateUrl: 'templates/manage/saveForm.html',
+            controller: 'ManageSaveFormCtrl'
+          }
+        }
+      })
 
       .state('tab.camera', {
         url: '/camera',

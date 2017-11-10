@@ -29,24 +29,17 @@ angular.module('starter.controllers')
         $cordovaGeolocation.getCurrentPosition(options).then(function(position) {
             $ionicLoading.hide();
             console.log("getCurrentPosition");
-
             var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
             var mapOptions = {
-              center: new google.maps.LatLng(39.980441, -75.156498),
+              // center: new google.maps.LatLng(39.980441, -75.156498),
               //new google.maps.LatLng(41.850033, -87.6500523),
-              latLng,
+              center: latLng,
               zoom: 11,
               mapTypeId: google.maps.MapTypeId.ROADMAP
             };
-
-
             console.log("google.maps.Map");
-
             $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
             var map = $scope.map;
-
             layer = new google.maps.FusionTablesLayer({
               query: {
                 select: 'geometry',
@@ -58,11 +51,9 @@ angular.module('starter.controllers')
                 strokeWeight: 3
               }
             });
-
             layer.setMap(map);
 
             var image = 'img/drops.png';
-
             $scope.markers = [];
 
             var createMarker = function(info) {
@@ -76,8 +67,8 @@ angular.module('starter.controllers')
 
               marker.content = "<div>";
               marker.content += "<h4>" + info.name + "</h4>" + " (" + info.lat + " , " + info.lon + ") ";
-              marker.content += "<div>";
-              marker.content += "<button class='button button-positive ' ng-click='gotoManagement(" + info.site_id + ")'>find project</button>";
+              marker.content += "<div><br>";
+              marker.content += "<button class='button button-small button-positive ' ng-click='gotoManagement(" + info.site_id + ")'>find project</button>";
               marker.content += "</div>";
               marker.content += "</div>";
               var compiled = $compile(marker.content)($scope);
@@ -106,23 +97,20 @@ angular.module('starter.controllers')
 
             };
 
-            if ($rootScope.isLogin == false || $rootScope.isLogin == undefined) {
-              alert("please login to see more");
-            } else {
-              var request = $http({
-                method: "post",
-                url: 'http://sciencetap.us/tao/app/getSiteName.php',
-                data: {
-                  "user_id": $rootScope.user.id
-                }
-              });
-              request.success(function(data) {
-                var markers = data.data
-                for (i = 0; i < markers.length; i++) {
-                  createMarker(markers[i]);
-                }
-              });
-            }
+            var request = $http({
+              method: "post",
+              url: 'http://sciencetap.us/API/app/getSiteName.php',
+              data: {
+                "user_id": $rootScope.user.id
+              }
+            });
+            request.success(function(data) {
+              var markers = data.data
+              for (i = 0; i < markers.length; i++) {
+                createMarker(markers[i]);
+              }
+            });
+
 
           },
           function(error) {
@@ -148,6 +136,16 @@ angular.module('starter.controllers')
 
         navigator.geolocation.getCurrentPosition(function(pos) {
           $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+
+
+          var myLatlng = new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude);
+          var image = 'img/people.png';
+          var marker_me = new google.maps.Marker({
+              position: myLatlng,
+              icon: image
+          });
+          marker_me.setMap($scope.map);
+
           $ionicLoading.hide();
         }, function(error) {
           alert('Unable to get location: ' + error.message);

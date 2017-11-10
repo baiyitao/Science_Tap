@@ -7,35 +7,37 @@
 
     <div>
       <form novalidate class="css-form">
-
+        <div class="padding">
+          <button class="button button-balanced  button-block" ng-click="saveForm(form)">Save Current Data</button>
+        </div>
         <div class="list">
-          <label ng-repeat="obj in date" class="item item-input item-stacked-label">
+          <label ng-repeat="obj in date track by $index" class="item item-input item-stacked-label ">
               <span class="input-label">{{obj}}</span>
               <input type="date" ng-model="form.date[$index].value" required />
               <input type="hidden" ng-model="form.date[$index].name" ng-init = "form.date[$index].name = obj"></input>
             </label>
 
-          <label ng-repeat="obj in time" class="item item-input item-stacked-label">
+          <label ng-repeat="obj in time track by $index" class="item item-input item-stacked-label">
               <span class="input-label">{{obj}}</span>
-              <input ng-model="form.time.name" value="obj" />
+              <!-- <input ng-model="form.time.name" value="obj" /> -->
               <input type="time" ng-model="form.time[$index].value" required />
               <input type="hidden" ng-model="form.time[$index].name" ng-init = "form.time[$index].name = obj"></input>
             </label>
-          <label ng-repeat="obj in text" class="item item-input item-stacked-label">
+          <label ng-repeat="obj in text track by $index" class="item item-input item-stacked-label">
               <span class="input-label">{{obj}}</span>
               <!-- <input ng-model="form.text.name" value="obj" /> -->
               <input type="text" ng-model="form.text[$index].value" required />
               <input type="hidden" ng-model="form.text[$index].name" ng-init = "form.text[$index].name = obj"></input>
             </label>
 
-          <label ng-repeat="obj in number" class="item item-input item-stacked-label">
+          <label ng-repeat="obj in number track by $index" class="item item-input item-stacked-label">
               <span class="input-label">{{obj}}</span>
               <input type="number" ng-model="form.number[$index].value" required />
               <input type="hidden" ng-model="form.number[$index].name" ng-init = "form.number[$index].name = obj"></input>
             </label>
 
 
-          <div class="item item-input item-select" ng-repeat="obj in selectSingle">
+          <div class="item item-input item-select" ng-repeat="obj in selectSingle track by $index">
             <div class="input-label">
               {{obj.name}}
             </div>
@@ -44,13 +46,14 @@
           </div>
 
           <div class="padding">
-            <div class="item " style="padding: 0px; border-width: 0px;" ng-repeat="obj in selectMulti">
+            <div class="item " style="padding: 0px; border-width: 0px;" ng-repeat="obj in selectMulti track by $index">
               <button class="button button-block button-balanced" modal-select="" ng-model="form.selectMulti[$index].value" options="obj.values" multiple="true" modal-title="Select some numbers">{{obj.name}}
                 <input type="hidden" ng-model="form.selectMulti[$index].name" ng-init = "form.selectMulti[$index].name = obj.name"></input>
                   <div class="option">
                     {{option}}
                   </div>
                 </button>
+                      <pre>value = {{form.selectMulti[$index].value }}</pre>
             </div>
           </div>
         </div>
@@ -59,16 +62,10 @@
           <button class="button button-positive  button-block" ng-click="submit(form)">submit</button>
         </div>
 
-        <!-- <div class="button-bar">
-          <a class="button button-block button-balanced" ng-click="reset()">Reset</a>
-          <a class="button button-block button-positive" ng-click="submit(form)">submit</a>
-        </div> -->
-
       </form>
-      <!-- <pre>form = {{form | json}}</pre> -->
+      <pre>form = {{form | json}}</pre>
     </div>
 
-    <!-- <button ng-click="addImage()">add new image</button> -->
 
     <div ng-repeat="tmpObj in images">
       <img ng-src="{{tmpObj.value}}" style="width:300px;height:200px;">
