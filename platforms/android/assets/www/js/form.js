@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-  .controller('ShowFormCtrl', function($scope, $ionicPopup, $stateParams, $http, $state, $ionicLoading, $cordovaCamera, $ionicActionSheet,$localStorage) {
+  .controller('ShowFormCtrl', function($scope, $ionicPopup, $stateParams, $http, $state, $ionicLoading, $cordovaCamera, $ionicActionSheet,$localStorage,$timeout) {
 
     $scope.images = [];
     $scope.imgCount = 0;
@@ -69,47 +69,20 @@ angular.module('starter.controllers')
 
 
       $scope.addImage = function() {
-        // Show the action sheet
-        var hideSheet = $ionicActionSheet.show({
-        	buttons: [{
-          	text: 'take picture'
-        	}, {
-          	text: 'choose from album'
-        	}],
-        	titleText: 'choose type',
-        	cancelText: 'cancel',
-        	cancel: function() {
-          	console.log("cancel");
-        	},
-        	buttonClicked: function(index) {
-          	if (index === 0) {
-              // new picture
-              var options = {
-                quality: 80,
-                destinationType: Camera.DestinationType.DATA_URL,
-                sourceType: Camera.PictureSourceType.CAMERA,
-                // allowEdit: true,
-                encodingType: Camera.EncodingType.JPEG,
-                // popoverOptions: CameraPopoverOptions,
-                saveToPhotoAlbum: false,
-                correctOrientation: true,
-                targetWidth: 1200,
-                targetHeight: 2000,
-              };
-            } else {
-            	// ablum
-            	var options = {
-              	quality: 80,
-              	// allowEdit: true,
-              	destinationType: navigator.camera.DestinationType.DATA_URL,
-              	sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
-              	correctOrientation: true,
-              	targetWidth: 1200,
-              	targetHeight: 1200,
-            	};
-            }
-          }
-        });
+
+
+        var options = {
+          quality: 80,
+          destinationType: Camera.DestinationType.DATA_URL,
+          sourceType: Camera.PictureSourceType.CAMERA,
+          // allowEdit: true,
+          encodingType: Camera.EncodingType.JPEG,
+          // popoverOptions: CameraPopoverOptions,
+          saveToPhotoAlbum: false,
+          correctOrientation: true,
+          targetWidth: 1200,
+          targetHeight: 2000,
+        };
 
         console.log('camera options: ' + JSON.stringify(options));
         $cordovaCamera.getPicture(options)

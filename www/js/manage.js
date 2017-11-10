@@ -99,96 +99,18 @@ angular.module('starter.controllers')
 
       $scope.addImage = function() {
 
-          var options = {};
-          // var myPopup = $ionicPopup.show({
-          //   title: 'Choose type',
-          //   buttons: [
-          //     { text: 'take picture',
-          //       onTap: function(e) {
-          //         var options = {
-          //           quality: 80,
-          //           destinationType: Camera.DestinationType.DATA_URL,
-          //           sourceType: Camera.PictureSourceType.CAMERA,
-          //           // allowEdit: true,
-          //           encodingType: Camera.EncodingType.JPEG,
-          //           // popoverOptions: CameraPopoverOptions,
-          //           saveToPhotoAlbum: false,
-          //           correctOrientation: true,
-          //           targetWidth: 1200,
-          //           targetHeight: 2000,
-          //         };
-          //           console.log('camera options: ' + JSON.stringify(options));
-          //       }
-          //     },
-          //     {
-          //       text: 'choose from album',
-          //       type: 'button-positive',
-          //       onTap: function(e) {
-          //         var options = {
-          //         	quality: 80,
-          //         	// allowEdit: true,
-          //         	destinationType: navigator.camera.DestinationType.DATA_URL,
-          //         	sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
-          //         	correctOrientation: true,
-          //         	targetWidth: 1200,
-          //         	targetHeight: 1200,
-          //       	};
-          //           console.log('camera options: ' + JSON.stringify(options));
-          //       }
-          //     },
-          //   ]
-          // });
-          //
 
+      	var options = {
+        	quality: 80,
+        	// allowEdit: true,
+        	destinationType: navigator.camera.DestinationType.DATA_URL,
+        	sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+        	correctOrientation: true,
+        	targetWidth: 1200,
+        	targetHeight: 1200,
+      	};
 
-
-
-
-
-
-
-        // Show the action sheet
-        var hideSheet = $ionicActionSheet.show({
-        	buttons: [{
-          	text: 'take picture'
-        	}, {
-          	text: 'choose from album'
-        	}],
-        	titleText: 'choose type',
-        	cancelText: 'cancel',
-        	cancel: function() {
-          	console.log("cancel");
-        	},
-        	buttonClicked: function(index) {
-          	if (index == 0) {
-              // new picture
-              var options = {
-                quality: 80,
-                destinationType: Camera.DestinationType.DATA_URL,
-                sourceType: Camera.PictureSourceType.CAMERA,
-                // allowEdit: true,
-                encodingType: Camera.EncodingType.JPEG,
-                // popoverOptions: CameraPopoverOptions,
-                saveToPhotoAlbum: false,
-                correctOrientation: true,
-                targetWidth: 1200,
-                targetHeight: 2000,
-              };
-            } else {
-            	// ablum
-            	var options = {
-              	quality: 80,
-              	// allowEdit: true,
-              	destinationType: navigator.camera.DestinationType.DATA_URL,
-              	sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
-              	correctOrientation: true,
-              	targetWidth: 1200,
-              	targetHeight: 1200,
-            	};
-            }
-          }
-        });
-
+        console.log('camera options: ' + JSON.stringify(options));
 
         $cordovaCamera.getPicture(options)
           .then(function(data) {
