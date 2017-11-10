@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-  .controller('ShowFormCtrl', function($scope, $ionicPopup, $stateParams, $http, $state, $ionicLoading, $cordovaCamera, $ionicActionSheet,$localStorage) {
+  .controller('ShowFormCtrl', function($scope, $ionicPopup, $stateParams, $http, $state, $ionicLoading, $cordovaCamera, $ionicActionSheet,$localStorage,$timeout) {
 
     $scope.images = [];
     $scope.imgCount = 0;
@@ -70,11 +70,12 @@ angular.module('starter.controllers')
 
       $scope.addImage = function() {
 
+        var options = {};
         var myPopup = $ionicPopup.show({
           title: 'Choose type',
           buttons: [
-            { text: 'take picture'
-              onTap: function() {
+            { text: 'take picture',
+              onTap: function(e) {
                 var options = {
                   quality: 80,
                   destinationType: Camera.DestinationType.DATA_URL,
@@ -87,12 +88,13 @@ angular.module('starter.controllers')
                   targetWidth: 1200,
                   targetHeight: 2000,
                 };
+                  console.log('camera options: ' + JSON.stringify(options));
               }
             },
             {
               text: 'choose from album',
               type: 'button-positive',
-              onTap: function() {
+              onTap: function(e) {
                 var options = {
                   quality: 80,
                   // allowEdit: true,
@@ -102,10 +104,14 @@ angular.module('starter.controllers')
                   targetWidth: 1200,
                   targetHeight: 1200,
                 };
+                  console.log('camera options: ' + JSON.stringify(options));
               }
             },
           ]
         });
+
+
+
 
         myPopup.then(function(res) {
           console.log('Tapped!', res);
@@ -113,9 +119,7 @@ angular.module('starter.controllers')
 
         $timeout(function() {
            myPopup.close(); //close the popup after 3 seconds for some reason
-        }, 3000);
-
-
+        }, 2000);
 
 
         // Show the action sheet

@@ -81,7 +81,7 @@ angular.module('starter.controllers')
 
     })
 
-    .controller('ManageSaveFormCtrl', function($scope, $rootScope, $state, $stateParams, $http,$localStorage,$ionicActionSheet,$ionicPopup, $ionicLoading) {
+    .controller('ManageSaveFormCtrl', function($scope, $rootScope, $state, $stateParams, $cordovaCamera,$http,$localStorage,$ionicActionSheet,$ionicPopup, $ionicLoading,$timeout) {
       $scope.images = [];
       $scope.imgCount = 0;
       $scope.saveform = $localStorage.saveForm[$stateParams.data.index[0]];
@@ -99,12 +99,12 @@ angular.module('starter.controllers')
 
       $scope.addImage = function() {
 
-
+          var options = {};
           var myPopup = $ionicPopup.show({
             title: 'Choose type',
             buttons: [
-              { text: 'take picture'
-                onTap: function() {
+              { text: 'take picture',
+                onTap: function(e) {
                   var options = {
                     quality: 80,
                     destinationType: Camera.DestinationType.DATA_URL,
@@ -117,12 +117,13 @@ angular.module('starter.controllers')
                     targetWidth: 1200,
                     targetHeight: 2000,
                   };
+                    console.log('camera options: ' + JSON.stringify(options));
                 }
               },
               {
                 text: 'choose from album',
                 type: 'button-positive',
-                onTap: function() {
+                onTap: function(e) {
                   var options = {
                   	quality: 80,
                   	// allowEdit: true,
@@ -132,10 +133,14 @@ angular.module('starter.controllers')
                   	targetWidth: 1200,
                   	targetHeight: 1200,
                 	};
+                    console.log('camera options: ' + JSON.stringify(options));
                 }
               },
             ]
           });
+
+
+
 
           myPopup.then(function(res) {
             console.log('Tapped!', res);
@@ -143,7 +148,7 @@ angular.module('starter.controllers')
 
           $timeout(function() {
              myPopup.close(); //close the popup after 3 seconds for some reason
-          }, 3000);
+          }, 2000);
 
 
 
@@ -190,10 +195,10 @@ angular.module('starter.controllers')
         //   }
         // });
 
-        console.log('camera options: ' + JSON.stringify(options));
+
         $cordovaCamera.getPicture(options)
           .then(function(data) {
-            hideSheet();
+            // hideSheet();
 
             console.log("after getPicture");
             //console.log(data);
