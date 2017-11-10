@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-  .controller('ShowFormCtrl', function($scope, $ionicPopup, $stateParams, $http, $state, $ionicLoading, $cordovaCamera, $ionicActionSheet) {
+  .controller('ShowFormCtrl', function($scope, $ionicPopup, $stateParams, $http, $state, $ionicLoading, $cordovaCamera, $ionicActionSheet,$localStorage) {
 
     $scope.images = [];
     $scope.imgCount = 0;
@@ -68,50 +68,49 @@ angular.module('starter.controllers')
       };
 
 
-
-
       $scope.addImage = function() {
         // Show the action sheet
-        // var hideSheet = $ionicActionSheet.show({
-        // 	buttons: [{
-        //   	text: 'take picture'
-        // 	}, {
-        //   	text: 'choose from album'
-        // 	}],
-        // 	titleText: 'choose type',
-        // 	cancelText: 'cancel',
-        // 	cancel: function() {
-        //   	console.log("cancel");
-        // 	},
-        // 	buttonClicked: function(index) {
-        //   	if (index === 0) {
-        // new picture
-        var options = {
-          quality: 100,
-          destinationType: Camera.DestinationType.DATA_URL,
-          sourceType: Camera.PictureSourceType.CAMERA,
-          // allowEdit: true,
-          encodingType: Camera.EncodingType.JPEG,
-          // popoverOptions: CameraPopoverOptions,
-          saveToPhotoAlbum: false,
-          correctOrientation: true,
-          targetWidth: 1200,
-          targetHeight: 2000,
-        };
+        var hideSheet = $ionicActionSheet.show({
+        	buttons: [{
+          	text: 'take picture'
+        	}, {
+          	text: 'choose from album'
+        	}],
+        	titleText: 'choose type',
+        	cancelText: 'cancel',
+        	cancel: function() {
+          	console.log("cancel");
+        	},
+        	buttonClicked: function(index) {
+          	if (index === 0) {
+              // new picture
+              var options = {
+                quality: 80,
+                destinationType: Camera.DestinationType.DATA_URL,
+                sourceType: Camera.PictureSourceType.CAMERA,
+                // allowEdit: true,
+                encodingType: Camera.EncodingType.JPEG,
+                // popoverOptions: CameraPopoverOptions,
+                saveToPhotoAlbum: false,
+                correctOrientation: true,
+                targetWidth: 1200,
+                targetHeight: 2000,
+              };
+            } else {
+            	// ablum
+            	var options = {
+              	quality: 80,
+              	// allowEdit: true,
+              	destinationType: navigator.camera.DestinationType.DATA_URL,
+              	sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+              	correctOrientation: true,
+              	targetWidth: 1200,
+              	targetHeight: 1200,
+            	};
+            }
+          }
+        });
 
-        // } else {
-        // 	// ablum
-        // 	var options = {
-        //   	quality: 100,
-        //   	// allowEdit: true,
-        //   	destinationType: navigator.camera.DestinationType.DATA_URL,
-        //   	sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
-        //   	correctOrientation: true,
-        //   	// targetWidth: 428,
-        //   	// targetHeight: 700,
-        // 	};
-
-        // }
         console.log('camera options: ' + JSON.stringify(options));
         $cordovaCamera.getPicture(options)
           .then(function(data) {
@@ -145,6 +144,23 @@ angular.module('starter.controllers')
           }
         }
       }
+
+      $scope.saveForm = function(form){
+        // var index = "i"+form.user_id+form.project_id+form.site_id+form.form_id;
+
+        if($localStorage.saveForm.length != 0){
+          var index = $localStorage.saveForm.length ;
+        } else {
+          var index = 0;
+        }
+
+        form.oldselectSingle = $scope.selectSingle;
+        form.oldselectMulti = $scope.selectMulti;
+
+        $localStorage.saveForm[index] = form;
+      };
+
+
 
       $scope.submit = function(form) {
 
@@ -324,7 +340,7 @@ angular.module('starter.controllers')
 
     var request = $http({
       method: "post",
-      url: 'http://sciencetap.us/tao/app/getProjectInfo.php',
+      url: 'http://sciencetap.us/API/app/getProjectInfo.php',
       data: identity
     })
 
@@ -349,7 +365,7 @@ angular.module('starter.controllers')
       console.log(data);
       var request = $http({
         method: "post",
-        url: 'http://sciencetap.us/tao/app/getFormInfo.php',
+        url: 'http://sciencetap.us/API/app/getFormInfo.php',
         data: data
       })
 

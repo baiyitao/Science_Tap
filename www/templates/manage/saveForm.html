@@ -1,0 +1,81 @@
+<ion-view view-title="{{saveform.name}}">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon icon ion-camera" ng-click="addImage()">
+    </button>
+  </ion-nav-buttons>
+  <ion-content>
+
+    <div>
+      <form novalidate class="css-form">
+        <div class="list">
+          <label ng-repeat="obj in saveform.date track by $index" class="item item-input item-stacked-label ">
+              <span class="input-label">{{obj.name}}</span>
+              <input type="date" ng-model="saveform.date[$index].value" required data-date-format="DD MMMM YYYY" />
+            </label>
+
+            <!-- <pre>saveform.date = {{saveform.date }}</pre> -->
+
+          <label ng-repeat="obj in saveform.time track by $index" class="item item-input item-stacked-label">
+              <span class="input-label">{{obj.name}}</span>
+              <input type="time" ng-model="saveform.time[$index].value" required />
+            </label>
+          <label ng-repeat="obj in saveform.text track by $index" class="item item-input item-stacked-label">
+              <span class="input-label">{{obj.name}}</span>
+              <input type="text" ng-model="saveform.text[$index].value" required />
+
+            </label>
+
+          <label ng-repeat="obj in saveform.number track by $index" class="item item-input item-stacked-label">
+              <span class="input-label">{{obj.name}}</span>
+              <input type="number" ng-model="saveform.number[$index].value" required />
+
+            </label>
+
+
+          <div class="item item-input item-select" ng-repeat="obj in saveform.oldselectSingle track by $index">
+            <div class="input-label">
+              {{obj.name}}
+            </div>
+            <select ng-model="saveform.selectSingle[$index].value"  ng-options="option for option in obj.values"></select>
+          </div>
+
+          <div class="padding">
+            <div class="item " style="padding: 0px; border-width: 0px;" ng-repeat="obj in saveform.oldselectMulti track by $index">
+              <button class="button button-block button-balanced" modal-select="" ng-model="saveform.selectMulti[$index].value" options="obj.values" multiple="true" modal-title="Select some numbers">{{obj.name}}
+
+                  <div class="option">
+                    {{option}}
+                  </div>
+                </button>
+                      <pre>value = {{saveform.selectMulti[$index].value }}</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="padding">
+          <button class="button button-positive  button-block" ng-click="submit(saveform)">submit</button>
+        </div>
+
+      </form>
+      <pre>saveform = {{saveform | json}}</pre>
+    </div>
+
+    <div ng-repeat="tmpObj in images">
+      <img ng-src="{{tmpObj.value}}" style="width:300px;height:200px;">
+      <button class="button button-assertive" ng-click="deleteImg(tmpObj.id)">delete</button>
+    </div>
+
+
+    <style type="text/css">
+      .css-form input.ng-invalid.ng-touched {
+        background-color: #FA787E;
+      }
+
+      .css-form input.ng-valid.ng-touched {
+        background-color: #78FA89;
+      }
+    </style>
+
+
+  </ion-content>
+</ion-view>
