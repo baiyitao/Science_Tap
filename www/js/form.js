@@ -113,9 +113,6 @@ angular.module('starter.controllers')
 
 
 
-        myPopup.then(function(res) {
-          console.log('Tapped!', res);
-        });
 
 
 
