@@ -1,3 +1,5 @@
 platforms/
 platforms/.DS_Store
 .DS_Store
+platforms/ios/www/js/form.js
+platforms/ios/www/js/manage.js
