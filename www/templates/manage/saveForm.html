@@ -5,6 +5,14 @@
   </ion-nav-buttons>
   <ion-content>
 
+    <div class="padding">
+      <button class="button button-balanced  button-block" ng-click="save(saveform)">Save Current Data</button>
+    </div>
+
+    <div class="padding">
+      <button class="button button-assertive  button-block" ng-click="delete()">delete</button>
+    </div>
+
     <div>
       <form novalidate class="css-form">
         <div class="list">
@@ -57,7 +65,7 @@
         </div>
 
       </form>
-      <pre>saveform = {{saveform | json}}</pre>
+      <pre ng-if="idAdmin">saveform = {{saveform | json}}</pre>
     </div>
 
     <div ng-repeat="tmpObj in images">

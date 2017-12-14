@@ -10,17 +10,18 @@ angular.module('starter.controllers')
             }
             var request = $http({
                 method: "post",
-                url: 'http://sciencetap.us/tao/app/getSubmission.php',
+                url: 'http://sciencetap.us/API/app/getSubmission.php',
                 data: data
             })
 
             request.success(function(data) {
                 $scope.submission = data.data;
-                console.log($scope.submission);
+                //console.log($scope.submission);
             })
 
 
             $scope.saveForm = $localStorage.saveForm;
+            console.log($scope.saveForm);
 
             //!!//return without site -666
 
@@ -65,7 +66,7 @@ angular.module('starter.controllers')
 
         var request = $http({
             method: "post",
-            url: 'http://sciencetap.us/tao/app/getSubmitData.php',
+            url: 'http://sciencetap.us/API/app/getSubmitData.php',
             data: data
         })
 
@@ -84,7 +85,8 @@ angular.module('starter.controllers')
     .controller('ManageSaveFormCtrl', function($scope, $rootScope, $state, $stateParams, $cordovaCamera,$http,$localStorage,$ionicActionSheet,$ionicPopup, $ionicLoading,$timeout) {
       $scope.images = [];
       $scope.imgCount = 0;
-      $scope.saveform = $localStorage.saveForm[$stateParams.data.index[0]];
+      var index = $stateParams.data.index[0];
+      $scope.saveform = $localStorage.saveForm[index];
 
       for(var i =0; i<$scope.saveform.date.length; i++){
         if($scope.saveform.date[i].value != undefined)
@@ -99,16 +101,16 @@ angular.module('starter.controllers')
 
       $scope.addImage = function() {
 
-
-      	var options = {
-        	quality: 80,
-        	// allowEdit: true,
-        	destinationType: navigator.camera.DestinationType.DATA_URL,
-        	sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
-        	correctOrientation: true,
-        	targetWidth: 1200,
-        	targetHeight: 1200,
-      	};
+        var options = {
+            quality: 75,
+            destinationType: Camera.DestinationType.DATA_URL,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 1200,
+            targetHeight: 1200,
+            popoverOptions: CameraPopoverOptions,
+            saveToPhotoAlbum: false
+        };
 
         console.log('camera options: ' + JSON.stringify(options));
 
@@ -145,85 +147,41 @@ angular.module('starter.controllers')
         }
       }
 
+      $scope.save = function(form){
+
+        var confirmPopup = $ionicPopup.confirm({
+          title: 'save?',
+        });
+
+        confirmPopup.then(function(res) {
+          if (res) {
+
+            $localStorage.saveForm[index] = form;
+            $state.go('tab.manage');
+          }
+        })
+      };
+
+      $scope.delete = function(form){
+        // var index = "i"+form.user_id+form.project_id+form.site_id+form.form_id;
+
+        var confirmPopup = $ionicPopup.confirm({
+          title: 'delete?',
+        });
+
+        confirmPopup.then(function(res) {
+          if (res) {
+            $localStorage.saveForm.splice(index, 1);
+            $state.go('tab.manage');
+          }
+        })
+
+
+      };
+
+
+
       $scope.submit = function(form) {
-
-        //
-        // var form = {
-        //   "user_id": 1,
-        //   "project_id": 1,
-        //   "site_id": 1,
-        //   "form_id": 1,
-        //   "name": "Creek Watch Field Sheet",
-        //   "date": {
-        //     "0": {
-        //       "name": "Date",
-        //       "value": "2017-03-30T04:00:00.000Z"
-        //     },
-        //     "1": {
-        //       "name": "Data sent(date)",
-        //       "value": "2017-04-03T04:00:00.000Z"
-        //     },
-        //     "2": {
-        //       "name": "Time Started",
-        //       "value": "2017-04-03T04:00:00.000Z"
-        //     },
-        //     "3": {
-        //       "name": "Time Ended",
-        //       "value": "2017-04-03T04:00:00.000Z"
-        //     }
-        //   },
-        //   "text": {
-        //     "0": {
-        //       "name": "secion",
-        //       "value": "1"
-        //     },
-        //     "1": {
-        //       "name": "Water Body",
-        //       "value": "2"
-        //     },
-        //     "2": {
-        //       "name": "Monitors",
-        //       "value": "34"
-        //     },
-        //     "3": {
-        //       "name": "Approximate rainfall",
-        //       "value": "52"
-        //     },
-        //     "4": {
-        //       "name": "notes",
-        //       "value": "123"
-        //     }
-        //   },
-        //   "number": {
-        //     "0": {
-        //       "name": "Number of photos sent",
-        //       "value": 234
-        //     },
-        //     "1": {
-        //       "name": "Days since last rainfall",
-        //       "value": 3345
-        //     }
-        //   },
-        //   "images": {
-        //     "0"{
-        //       "value": gggggg
-        //     }
-        //   }
-
-
-        //   "selectSingle": {
-        //     "0": {
-        //       "name": "test select more than 1",
-        //       "value": "xxxxx"
-        //     }
-        //   },
-        //   "selectMulti": {
-        //     "0": {
-        //       "name": "current weather",
-        //       "value": ["partly cloudy", "overcast", "rain(light)"]
-        //     }
-        //   }
-        // };
 
         var confirmPopup = $ionicPopup.confirm({
           title: 'submit?',
@@ -274,7 +232,7 @@ angular.module('starter.controllers')
 
             var request = $http({
               method: "post",
-              url: 'http://sciencetap.us/tao/app/submitFormData.php',
+              url: 'http://sciencetap.us/API/app/submitFormData.php',
               data: form
             })
             //show loading
@@ -283,7 +241,7 @@ angular.module('starter.controllers')
               template: 'submitting form data'
             });
             request.success(function(response) {
-              $localStorage.saveForm.splice($stateParams.data.index[0], 1);
+              $localStorage.saveForm.splice(index, 1);
               console.log("submitFormData");
               console.log(response)
               if (response.success) {

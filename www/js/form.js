@@ -18,7 +18,7 @@ angular.module('starter.controllers')
 
     var request = $http({
       method: "post",
-      url: 'http://sciencetap.us/tao/app/getForm.php',
+      url: 'http://sciencetap.us/API/app/getForm.php',
       data: data
     })
     request.success(function(data) {
@@ -121,16 +121,24 @@ angular.module('starter.controllers')
       $scope.saveForm = function(form){
         // var index = "i"+form.user_id+form.project_id+form.site_id+form.form_id;
 
-        if($localStorage.saveForm.length != 0){
-          var index = $localStorage.saveForm.length ;
-        } else {
-          var index = 0;
-        }
+        var confirmPopup = $ionicPopup.confirm({
+          title: 'save?',
+        });
 
-        form.oldselectSingle = $scope.selectSingle;
-        form.oldselectMulti = $scope.selectMulti;
+        confirmPopup.then(function(res) {
+          if (res) {
+            if($localStorage.saveForm.length != 0){
+              var index = $localStorage.saveForm.length ;
+            } else {
+              var index = 0;
+            }
+            form.oldselectSingle = $scope.selectSingle;
+            form.oldselectMulti = $scope.selectMulti;
+            $localStorage.saveForm[index] = form;
+            $state.go('tab.manage');
+          }
+        })
 
-        $localStorage.saveForm[index] = form;
       };
 
 
@@ -264,7 +272,7 @@ angular.module('starter.controllers')
 
             var request = $http({
               method: "post",
-              url: 'http://sciencetap.us/tao/app/submitFormData.php',
+              url: 'http://sciencetap.us/API/app/submitFormData.php',
               data: form
             })
             //show loading
@@ -322,8 +330,6 @@ angular.module('starter.controllers')
       console.log($scope.project);
       //$scope.selectValue = $scope.project[0];
     })
-
-
 
     $scope.getFromId = function(project_id) {
 

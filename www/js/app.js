@@ -52,7 +52,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       })
 
       // Each tab has its own nav history stack:
-
       .state('tab.map', {
         url: '/map',
         views: {
@@ -63,38 +62,30 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       })
 
-      .state('tab.manage', {
-        url: '/manage',
-        views: {
-          'tab-manage': {
-            templateUrl: 'templates/manage/tab-manage.html',
-            controller: 'ManageCtrl'
-          }
-        }
-      })
-
-      .state('tab.manage-form', {
-        url: '/manage-form',
+      .state('tab.project-select', {
+        cache: false,
+        url: '/projectselect',
         params: {
           data: null
         },
         views: {
-          'tab-manage': {
-            templateUrl: 'templates/manage/tab-manage-form.html',
-            controller: 'ManageFormCtrl'
+          'tab-map': {
+            templateUrl: 'templates/map/project-select.html',
+            controller: 'ProjectSelectCtrl'
           }
         }
       })
 
-      .state('tab.saveForm', {
-        url: '/saveForm',
+      .state('tab.map-form', {
+        cache: false,
+        url: '/mapform',
         params: {
           data: null
         },
         views: {
-          'tab-manage': {
-            templateUrl: 'templates/manage/saveForm.html',
-            controller: 'ManageSaveFormCtrl'
+          'tab-map': {
+            templateUrl: 'templates/map/showForm.html',
+            controller: 'ShowFormCtrl'
           }
         }
       })
@@ -132,30 +123,38 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       })
 
-      .state('tab.project-select', {
-        cache: false,
-        url: '/projectselect',
-        params: {
-          data: null
-        },
+      .state('tab.manage', {
+        url: '/manage',
         views: {
-          'tab-map': {
-            templateUrl: 'templates/map/project-select.html',
-            controller: 'ProjectSelectCtrl'
+          'tab-manage': {
+            templateUrl: 'templates/manage/tab-manage.html',
+            controller: 'ManageCtrl'
           }
         }
       })
 
-      .state('tab.map-form', {
-        cache: false,
-        url: '/mapform',
+      .state('tab.manage-form', {
+        url: '/manage-form',
         params: {
           data: null
         },
         views: {
-          'tab-map': {
-            templateUrl: 'templates/map/showForm.html',
-            controller: 'ShowFormCtrl'
+          'tab-manage': {
+            templateUrl: 'templates/manage/tab-manage-form.html',
+            controller: 'ManageFormCtrl'
+          }
+        }
+      })
+
+      .state('tab.saveForm', {
+        url: '/saveForm',
+        params: {
+          data: null
+        },
+        views: {
+          'tab-manage': {
+            templateUrl: 'templates/manage/saveForm.html',
+            controller: 'ManageSaveFormCtrl'
           }
         }
       })
@@ -199,6 +198,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/account');
+    $urlRouterProvider.otherwise('/tab/map');
 
   })

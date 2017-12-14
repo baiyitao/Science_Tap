@@ -124,7 +124,7 @@ angular.module('starter.controllers')
                                 // console.log($scope.pictures);
                                 var request = $http({
                                     method: "post",
-                                    url: 'http://sciencetap.us/tao/app/submitPictureNoSite.php',
+                                    url: 'http://sciencetap.us/API/app/submitPictureNoSite.php',
                                     data: $scope.pictures
                                 })
                                 //show loading
@@ -170,7 +170,7 @@ angular.module('starter.controllers')
         }
         var request = $http({
             method: "post",
-            url: 'http://sciencetap.us/tao/app/getPictureHistory.php',
+            url: 'http://sciencetap.us/API/app/getPictureHistory.php',
             data: data
         })
 
@@ -210,7 +210,7 @@ angular.module('starter.controllers')
 
         var request = $http({
             method: "post",
-            url: 'http://sciencetap.us/tao/app/getSubmitData.php',
+            url: 'http://sciencetap.us/API/app/getSubmitData.php',
             data: data
         })
 

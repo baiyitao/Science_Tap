@@ -1,42 +1,21 @@
-
 <ion-view view-title="Project Select">
-  <ion-content>
-
-    <div class="item item-input item-select">
-      <div class="input-label">
-        select project
+   <ion-content>
+      <div class="item item-input item-select">
+         <div class="input-label">
+            select project
+         </div>
+         <select ng-model="selectValue" ng-change="getFromId(selectValue.project_id)" ng-options="item as item.name for item in project">
+         </select>
       </div>
-      <select ng-model="selectValue" ng-change="getFromId(selectValue.project_id)" ng-options="item as item.name for item in project">
-        </select>
-
-
-<!-- 
-        <button class="button button-royal" modal-select="" ng-model="selectValue" options="project">
-                    select project
-                    <div class="option">
-                      <h2>{{option.name}}</h2>
-                    </div>
-                  </button>
-         -->
-    </div>
-
-    <!-- <pre>selectValue = {{selectValue | json}}</pre> -->
-
-    <div class="item item-input item-select" ng-show="showform == true">
-      <div class="input-label">
-        select form
+      <!-- <pre>selectValue = {{selectValue | json}}</pre> -->
+      <div class="item item-input item-select" ng-show="showform == true">
+         <div class="input-label">
+            select form
+         </div>
+         <select ng-model="selectValue2" ng-change="showButton()" ng-options="item as item.form_name for item in form">
+         </select>
       </div>
-      <select ng-model="selectValue2" ng-change="showButton()" ng-options="item as item.form_name for item in form">
-      </select>
-    </div>
-    <!-- <pre>selectValue2 = {{selectValue2 | json}}</pre> -->
-
-
-
-    <button ng-show="showB" class="button button-block button-positive" ng-click="getForm(selectValue.project_id,selectValue2.form_id)"> go to form </button>
-
-
-
-
-  </ion-content>
+      <!-- <pre>selectValue2 = {{selectValue2 | json}}</pre> -->
+      <button ng-show="showB" class="button button-block button-positive" ng-click="getForm(selectValue.project_id,selectValue2.form_id)"> go to form </button>
+   </ion-content>
 </ion-view>

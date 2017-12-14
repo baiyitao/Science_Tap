@@ -9,7 +9,7 @@
 
 <div ng-show="isLogin == true" class="card" ng-repeat="obj in saveForm | filter:searchText" ng-click="temp([$index])">
   <div class="item item-divider " style="background-color: red">
-    {{obj.form_name}}
+    {{$index}}, {{obj.form_name}}
   </div>
 </div>
 

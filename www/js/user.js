@@ -14,7 +14,7 @@ angular.module('starter.controllers')
       //here call api, post user name and password、
       $http({
         method: "post",
-         url: 'http://sciencetap.us/tao/app/login.php',
+         url: 'http://sciencetap.us/API/app/login.php',
         data: userInfo
       }).then(function(response) {
 
@@ -84,7 +84,7 @@ angular.module('starter.controllers')
 
         $http({
           method: "post",
-           url: 'http://sciencetap.us/tao/app/registerUser.php',
+           url: 'http://sciencetap.us/API/app/registerUser.php',
           data: registerInfo
         }).then(function(response) {
 
