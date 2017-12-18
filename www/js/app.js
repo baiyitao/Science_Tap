@@ -23,7 +23,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     });
 
     if($localStorage.isLogin){
-      console.log("yoyoyo");
       $rootScope.isLogin = true;
       $rootScope.user = $localStorage.user;
     }

@@ -140,7 +140,7 @@ angular.module('starter.controllers')
       $scope.deleteImg = function(id) {
         var i;
         for (i = 0; i < $scope.images.length; i++) {
-          if ($scope.images[i].id = id) {
+          if ($scope.images[i].id == id) {
             $scope.images.splice(i, 1);
             break;
           }

@@ -1,28 +1,22 @@
 angular.module('starter.controllers')
     .controller('CameraCtrl', function($scope, $rootScope, $http, $state, $ionicLoading, $cordovaCamera, $ionicActionSheet, $cordovaGeolocation,$ionicPopup) {
-
         $scope.description;
-
         if ($rootScope.isLogin == false || $rootScope.isLogin == undefined) {
             alert("please login to see more");
             $state.go('tab.account')
         } else {
             $scope.images = [];
             $scope.imgCount = 0;
-
-
             var options = {
                 timeout: 10000,
                 enableHighAccuracy: true
             };
-
             $scope.loading = $ionicLoading.show({
                 template: 'getting geolocation'
             });
-
             $cordovaGeolocation.getCurrentPosition(options).then(function(position) {
                     $ionicLoading.hide();
-                    console.log("getCurrentPosition");
+                    //console.log("getCurrentPosition");
                     $scope.pictures = {
                         "user_id": $rootScope.user.id,
                         "lat": position.coords.latitude,
@@ -72,12 +66,12 @@ angular.module('starter.controllers')
                         // 	};
 
                         // }
-                        console.log('camera options: ' + JSON.stringify(options));
+                        //console.log('camera options: ' + JSON.stringify(options));
                         $cordovaCamera.getPicture(options)
                             .then(function(data) {
 
 
-                                console.log("after getPicture");
+                                //console.log("after getPicture");
                                 //console.log(data);
                                 //console.log('camera data: ' + angular.toJson(data));
 
@@ -89,7 +83,7 @@ angular.module('starter.controllers')
                                 })
                                 $scope.imgCount++;
                             }, function(error) {
-                                console.log('camera error: ' + angular.toJson(error));
+                                //console.log('camera error: ' + angular.toJson(error));
                             });
                         // return true;
                         // }
@@ -99,7 +93,7 @@ angular.module('starter.controllers')
                     $scope.deleteImg = function(id) {
                         var i;
                         for (i = 0; i < $scope.images.length; i++) {
-                            if ($scope.images[i].id = id) {
+                            if ($scope.images[i].id == id) {
                                 $scope.images.splice(i, 1);
                                 break;
                             }
@@ -109,7 +103,6 @@ angular.module('starter.controllers')
                     $scope.history = function() {
                         $state.go('tab.history');
                     }
-
 
                     $scope.submit = function(text) {
 
@@ -132,15 +125,15 @@ angular.module('starter.controllers')
                                     template: 'submit pictures'
                                 });
                                 request.success(function(response) {
-                                    console.log("submit pictures");
-                                    console.log(response)
+                                    //console.log("submit pictures");
+                                    //console.log(response)
                                     if (response.success) {
-                                        console.log("submit pictures success");
+                                        //console.log("submit pictures success");
                                         $ionicLoading.hide();
                                         alert("submit success, now go to history page");
                                         $state.go('tab.history');
                                     } else {
-                                        console.log("submit fail");
+                                        //console.log("submit fail");
                                         $ionicLoading.hide();
                                         alert("submit fail");
                                         //stay here
@@ -158,13 +151,12 @@ angular.module('starter.controllers')
                 function(error) {
                     $ionicLoading.hide();
                     alert("Could not get location");
-                    console.log("Could not get location");
+                    //console.log("Could not get location");
                 });
         }
     })
 
     .controller('HistoryCtrl', function($scope, $stateParams, $http, $state, $rootScope) {
-
         var data = {
             "user_id": $rootScope.user.id
         }
@@ -173,17 +165,13 @@ angular.module('starter.controllers')
             url: 'http://sciencetap.us/API/app/getPictureHistory.php',
             data: data
         })
-
         request.success(function(data) {
             $scope.pictureHistory = data.data;
-            console.log($scope.pictureHistory);
+            //console.log($scope.pictureHistory);
         })
-
         //!!//return without site -666
 
-
         $scope.historyDetial = function(id) {
-            //var test = 1234567;
             var identity = {
                 "submission_id": id
             }
@@ -191,16 +179,12 @@ angular.module('starter.controllers')
                 data: identity
             });
         }
-
-
     })
 
 
     .controller('HistoryDetailCtrl', function($scope, $rootScope, $state, $stateParams, $http) {
-
-
         var submission_id = $stateParams.data.submission_id[0];
-        console.log(submission_id);
+        //console.log(submission_id);
 
         $scope.submission_data = {};
 
@@ -223,7 +207,7 @@ angular.module('starter.controllers')
 
             }
 
-            console.log($scope.submission_data);
-            console.log($scope.photo);
+            //console.log($scope.submission_data);
+            //console.log($scope.photo);
         })
     })
