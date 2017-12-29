@@ -184,20 +184,15 @@ angular.module('starter.controllers')
 
     .controller('HistoryDetailCtrl', function($scope, $rootScope, $state, $stateParams, $http) {
         var submission_id = $stateParams.data.submission_id[0];
-        //console.log(submission_id);
-
         $scope.submission_data = {};
-
         var data = {
             "submission_id": submission_id
         }
-
         var request = $http({
             method: "post",
             url: 'http://sciencetap.us/API/app/getSubmitData.php',
             data: data
         })
-
         request.success(function(data) {
             $scope.submission_data = data.data;
             $scope.photo = data.photo;
@@ -206,8 +201,5 @@ angular.module('starter.controllers')
                 $scope.lon = data.photo[0].lon;
 
             }
-
-            //console.log($scope.submission_data);
-            //console.log($scope.photo);
         })
     })

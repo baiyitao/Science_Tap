@@ -2,18 +2,12 @@
   <ion-content >
 
     <div ng-if="isLogin == true" class="padding">
-
       <h2>Hello {{user.firstname}}</h2>
       <p style="margin-top:0px;color:#000000;">{{user.email}}</p>
-
       <button ng-if="isLogin == true" class="button button-positive  button-block" ng-click="logout()">Log out</button>
-
     </div>
 
-
-
     <div class="padding" ng-if="isLogin == false">
-
       <label class="item item-input">
                 <span class="input-label">email</span>
                 <input type="text" ng-model="userInfo.email">
@@ -24,7 +18,6 @@
               </label>
     </div>
     <div class="padding" ng-if="isLogin == false">
-      <!-- <button class="button button-block button-positive" ng-click="signIn(user)"> -->
       <button class="button button-block button-positive" ng-click="login(userInfo)">
                 Login
               </button>
@@ -35,19 +28,6 @@
         register
       </p> -->
     </div>
-
-
-
-    <!-- <form  ng-if="isLogin == false">
-      <h2>Login</h2>
-      <label >name <input type="text" ng-model="user.name" required /></label><br />
-      <label >password <input type="text" ng-model="user.password" required /></label><br />
-
-      <input type="submit" ng-click="login()" value="Save" />
-
-    </form> -->
-
-    <!-- <pre ng-if="debug == true">userInfo = {{userInfo | json}}</pre> -->
 
   </ion-content>
 </ion-view>

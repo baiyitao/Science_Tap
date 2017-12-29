@@ -1,6 +1,5 @@
 angular.module('starter.controllers')
     .controller('ManageCtrl', function($scope, $rootScope, $state, $http,$localStorage) {
-
         if ($rootScope.isLogin == false || $rootScope.isLogin == undefined) {
             alert("please login to see more");
             $state.go('tab.account')
@@ -13,21 +12,13 @@ angular.module('starter.controllers')
                 url: 'http://sciencetap.us/API/app/getSubmission.php',
                 data: data
             })
-
             request.success(function(data) {
                 $scope.submission = data.data;
-                //console.log($scope.submission);
             })
-
-
             $scope.saveForm = $localStorage.saveForm;
             console.log($scope.saveForm);
-
-            //!!//return without site -666
-
         }
         $scope.gotoSubmission = function(id) {
-            //var test = 1234567;
             var identity = {
                 "submission_id": id
             }
@@ -35,8 +26,6 @@ angular.module('starter.controllers')
                 data: identity
             });
         }
-
-
         $scope.temp = function(index) {
           var identity = {
               "index": index
@@ -45,39 +34,23 @@ angular.module('starter.controllers')
               data: identity
           });
         }
-
-
     })
 
     .controller('ManageFormCtrl', function($scope, $rootScope, $state, $stateParams, $http) {
-
-        $scope.form = {
-            "id": 1
-        }
-
         var submission_id = $stateParams.data.submission_id[0];
-        console.log(submission_id);
-
         $scope.submission_data = {};
-
         var data = {
             "submission_id": submission_id
         }
-
         var request = $http({
             method: "post",
             url: 'http://sciencetap.us/API/app/getSubmitData.php',
             data: data
         })
-
         request.success(function(data) {
-            $scope.showSub = true;
             $scope.submission_data = data.data;
             $scope.photo = data.photo;
             $scope.site_id = data.site_id;
-            console.log($scope.submission_data);
-            console.log($scope.photo);
-            console.log($scope.site_id);
         })
 
     })
@@ -92,15 +65,8 @@ angular.module('starter.controllers')
         if($scope.saveform.date[i].value != undefined)
           $scope.saveform.date[i].value = new Date($scope.saveform.date[i].value);
       }
-      console.log($scope.saveform);
-
-      // $scope.yoyoyo  = function(form) {
-      //     console.log(form);
-      // }
-
-
+      //console.log($scope.saveform);
       $scope.addImage = function() {
-
         var options = {
             quality: 75,
             destinationType: Camera.DestinationType.DATA_URL,
@@ -111,17 +77,11 @@ angular.module('starter.controllers')
             popoverOptions: CameraPopoverOptions,
             saveToPhotoAlbum: false
         };
-
-        console.log('camera options: ' + JSON.stringify(options));
-
+        //console.log('camera options: ' + JSON.stringify(options));
         $cordovaCamera.getPicture(options)
           .then(function(data) {
             hideSheet();
-
-            console.log("after getPicture");
-            //console.log(data);
-            //console.log('camera data: ' + angular.toJson(data));
-
+            //console.log("after getPicture");
             var id = $scope.imgCount;
             var imageData = "data:image/jpeg;base64," + data;
             $scope.images.push({
@@ -130,11 +90,8 @@ angular.module('starter.controllers')
             })
             $scope.imgCount++;
           }, function(error) {
-            console.log('camera error: ' + angular.toJson(error));
+            //console.log('camera error: ' + angular.toJson(error));
           });
-        // return true;
-        // }
-        // });
       };
 
       $scope.deleteImg = function(id) {
@@ -148,14 +105,11 @@ angular.module('starter.controllers')
       }
 
       $scope.save = function(form){
-
         var confirmPopup = $ionicPopup.confirm({
           title: 'save?',
         });
-
         confirmPopup.then(function(res) {
           if (res) {
-
             $localStorage.saveForm[index] = form;
             $state.go('tab.manage');
           }
@@ -163,40 +117,29 @@ angular.module('starter.controllers')
       };
 
       $scope.delete = function(form){
-        // var index = "i"+form.user_id+form.project_id+form.site_id+form.form_id;
-
         var confirmPopup = $ionicPopup.confirm({
           title: 'delete?',
         });
-
         confirmPopup.then(function(res) {
           if (res) {
             $localStorage.saveForm.splice(index, 1);
             $state.go('tab.manage');
           }
         })
-
-
       };
 
-
-
       $scope.submit = function(form) {
-
         var confirmPopup = $ionicPopup.confirm({
           title: 'submit?',
         });
-
         confirmPopup.then(function(res) {
           if (res) {
             select = [];
-
             var i, count = 0;
             if (form.selectSingle != undefined) {
               for (i = 0; i < Object.keys(form.selectSingle).length; i++) {
                 select[i] = {};
                 select[i].name = form.selectSingle[i].name;
-
                 if(form.selectSingle[i].value == undefined){
                   select[i].value = [];
                   select[i].value[0] = "null";
@@ -204,7 +147,6 @@ angular.module('starter.controllers')
                   select[i].value = [];
                   select[i].value[0] = form.selectSingle[i].value;
                 }
-
                 count++;
               }
               delete form.selectSingle;
@@ -218,18 +160,14 @@ angular.module('starter.controllers')
                   select[count].value = [];
                   select[count].value[0] = "null";
                 }
-
                 count++;
               }
               delete form.selectMulti;
             }
 
             form.select = select;
-
-            console.log(form);
-
+            //console.log(form);
             form.images = $scope.images;
-
             var request = $http({
               method: "post",
               url: 'http://sciencetap.us/API/app/submitFormData.php',
@@ -242,10 +180,10 @@ angular.module('starter.controllers')
             });
             request.success(function(response) {
               $localStorage.saveForm.splice(index, 1);
-              console.log("submitFormData");
-              console.log(response)
+              //console.log("submitFormData");
+              //console.log(response)
               if (response.success) {
-                console.log("submit form success");
+                //console.log("submit form success");
                 $ionicLoading.hide();
                 alert("submit success, now go to Manage page");
                 $state.go('tab.manage');
@@ -260,10 +198,5 @@ angular.module('starter.controllers')
 
           }
         });
-
-
-
       };
-
-
     })

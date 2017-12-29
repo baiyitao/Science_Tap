@@ -59,9 +59,9 @@ angular.module('starter.controllers')
 
     }
 
-    $scope.register = function() {
-      $state.go('tab.register');
-    }
+    // $scope.register = function() {
+    //   $state.go('tab.register');
+    // }
 
   })
 
