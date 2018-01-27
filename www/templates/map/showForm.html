@@ -56,6 +56,7 @@
                       <pre>value = {{form.selectMulti[$index].value }}</pre>
             </div>
           </div>
+
         </div>
 
         <div class="padding">
@@ -63,13 +64,13 @@
         </div>
 
       </form>
-      <pre>form = {{form | json}}</pre>
+      <!-- <pre>form = {{form | json}}</pre> -->
     </div>
 
+    <p style="margin:3%;">click image to delete</p>
 
-    <div ng-repeat="tmpObj in images">
-      <img ng-src="{{tmpObj.value}}" style="width:300px;height:200px;">
-      <button class="button button-assertive" ng-click="deleteImg(tmpObj.id)">delete</button>
+    <div ng-repeat="tmpObj in images" style="width: 94%;margin:3%;">
+      <img ng-src="{{tmpObj.value}}" style="width:90%;" ng-click="deleteImg(tmpObj.id)">
     </div>
 
     <!-- <pre> imgage = {{images | json }}</pre> -->

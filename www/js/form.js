@@ -326,6 +326,15 @@ angular.module('starter.controllers')
       //$scope.selectValue = $scope.project[0];
     })
 
+
+    $scope.getOpt = function(option) {
+      if(option == undefined){
+        console.log("y");
+      } else {
+        return option;
+      }
+    };
+
     $scope.getFromId = function(project_id) {
 
       $scope.showB = false;

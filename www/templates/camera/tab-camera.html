@@ -11,10 +11,9 @@
   <!-- <pre> description = {{description | json }}</pre> -->
 
 
-
+    <p style="margin:3%;">click image to delete</p>
     <div ng-repeat="tmpObj in images" style="width: 94%;margin:3%;">
-        <img ng-src="{{tmpObj.value}}" style="width:70%;">
-        <button class="button button-assertive" ng-click="deleteImg(tmpObj.id)">delete</button>
+        <img ng-src="{{tmpObj.value}}" style="width:70%;" ng-click="deleteImg(tmpObj.id)">
     </div>
 
     <!-- <pre> count = {{imgCount | json }}</pre> -->
